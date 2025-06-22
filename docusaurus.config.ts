@@ -89,6 +89,15 @@ const config: Config = {
         },
         {to: '/blog', label: 'Blog', position: 'left'},
         {
+          label: 'Catalog',
+          position: 'left',
+          items: [
+            {to: '/docs/deployment', label: 'Deployment'},
+            {to: '/docs/service', label: 'Service'},
+            {to: '/docs/domain', label: 'Domain'},
+          ],
+        },
+        {
           href: 'https://github.com/facebook/docusaurus',
           label: 'GitHub',
           position: 'right',

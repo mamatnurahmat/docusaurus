@@ -1,0 +1,5 @@
+[
+  { "namespace": "default", "name": "web-app", "port": 8080 },
+  { "namespace": "kube-system", "name": "metrics-server", "port": 443 },
+  { "namespace": "dev", "name": "api-service", "port": 3000 }
+] 
