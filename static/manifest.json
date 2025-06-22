@@ -1,0 +1,21 @@
+{
+  "name": "DevOps Documentation",
+  "short_name": "DevOpsDocs",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#2e8555",
+  "description": "Complete guide to DevOps practices and tools",
+  "icons": [
+    {
+      "src": "/img/logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    },
+    {
+      "src": "/img/favicon.ico",
+      "sizes": "32x32 16x16",
+      "type": "image/x-icon"
+    }
+  ]
+} 

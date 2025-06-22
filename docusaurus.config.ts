@@ -157,6 +157,48 @@ const config: Config = {
       theme: {light: 'neutral', dark: 'forest'},
     },
   } satisfies Preset.ThemeConfig,
+
+  plugins: [
+    // [
+    //   '@docusaurus/plugin-client-redirects',
+    //   {
+    //     redirects: [
+    //       {
+    //         to: '/service.html',
+    //         from: ['/docs/service'],
+    //       },
+    //     ],
+    //   },
+    // ],
+    [
+      '@docusaurus/plugin-pwa',
+      {
+        debug: true,
+        offlineModeActivationStrategies: [
+          'appInstalled',
+          'standalone',
+          'queryString',
+        ],
+        pwaHead: [
+          {
+            tagName: 'link',
+            rel: 'icon',
+            href: '/img/docusaurus.png',
+          },
+          {
+            tagName: 'link',
+            rel: 'manifest',
+            href: '/manifest.json',
+          },
+          {
+            tagName: 'meta',
+            name: 'theme-color',
+            content: 'rgb(37, 194, 160)',
+          },
+        ],
+      },
+    ],
+  ],
 };
 
 export default config;

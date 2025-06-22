@@ -29,7 +29,6 @@ const devopsCategories = [
     ]
   },
   {
-    id: 'gitops',
     label: 'GitOps',
     description: 'Git as the source of truth',
     items: [
