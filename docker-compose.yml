@@ -1,0 +1,156 @@
+version: '3.8'
+
+services:
+  # Development environment
+  devops-docs-dev:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: development
+    container_name: devops-docs-dev
+    ports:
+      - "3000:3000"
+    volumes:
+      - .:/app
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+      - CHOKIDAR_USEPOLLING=true
+    networks:
+      - devops-docs-network
+    profiles:
+      - dev
+
+  # Production environment
+  devops-docs-prod:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: devops-docs-prod
+    ports:
+      - "80:80"
+    networks:
+      - devops-docs-network
+    profiles:
+      - prod
+
+  # Production with SSL (using nginx-proxy)
+  devops-docs-ssl:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: production
+    container_name: devops-docs-ssl
+    environment:
+      - VIRTUAL_HOST=devops-docs.local
+      - VIRTUAL_PORT=80
+    networks:
+      - devops-docs-network
+      - nginx-proxy
+    profiles:
+      - ssl
+
+  # Nginx proxy for SSL (optional)
+  nginx-proxy:
+    image: nginxproxy/nginx-proxy:latest
+    container_name: nginx-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - ./nginx-proxy/certs:/etc/nginx/certs:ro
+      - ./nginx-proxy/vhost.d:/etc/nginx/vhost.d
+      - ./nginx-proxy/html:/usr/share/nginx/html
+    networks:
+      - nginx-proxy
+    profiles:
+      - ssl
+
+  # Let's Encrypt companion for SSL certificates
+  letsencrypt:
+    image: nginxproxy/acme-companion:latest
+    container_name: letsencrypt
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./nginx-proxy/certs:/etc/nginx/certs:rw
+      - ./nginx-proxy/vhost.d:/etc/nginx/vhost.d
+      - ./nginx-proxy/html:/usr/share/nginx/html
+      - ./nginx-proxy/acme:/etc/acme.sh
+    environment:
+      - DEFAULT_EMAIL=admin@devops-docs.local
+    networks:
+      - nginx-proxy
+    profiles:
+      - ssl
+
+  # Monitoring with Prometheus and Grafana
+  prometheus:
+    image: prom/prometheus:latest
+    container_name: prometheus
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    command:
+      - '--config.file=/etc/prometheus/prometheus.yml'
+      - '--storage.tsdb.path=/prometheus'
+      - '--web.console.libraries=/etc/prometheus/console_libraries'
+      - '--web.console.templates=/etc/prometheus/consoles'
+      - '--storage.tsdb.retention.time=200h'
+      - '--web.enable-lifecycle'
+    networks:
+      - devops-docs-network
+    profiles:
+      - monitoring
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3001:3000"
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana/dashboards:/etc/grafana/provisioning/dashboards
+      - ./monitoring/grafana/datasources:/etc/grafana/provisioning/datasources
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_USERS_ALLOW_SIGN_UP=false
+    networks:
+      - devops-docs-network
+    profiles:
+      - monitoring
+
+  # Backup service
+  backup:
+    image: alpine:latest
+    container_name: devops-docs-backup
+    volumes:
+      - ./backup:/backup
+      - devops_docs_data:/data:ro
+    command: |
+      sh -c "
+        while true; do
+          echo 'Creating backup...'
+          tar -czf /backup/devops-docs-$$(date +%Y%m%d-%H%M%S).tar.gz -C /data .
+          echo 'Backup completed'
+          sleep 86400
+        done
+      "
+    networks:
+      - devops-docs-network
+    profiles:
+      - backup
+
+networks:
+  devops-docs-network:
+    driver: bridge
+  nginx-proxy:
+    driver: bridge
+
+volumes:
+  prometheus_data:
+  grafana_data:
+  devops_docs_data: 
