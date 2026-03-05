@@ -1,0 +1,20 @@
+[
+    {
+        "username": "devops",
+        "password": "devops123",
+        "role": "devops",
+        "name": "DevOps Engineer"
+    },
+    {
+        "username": "manager",
+        "password": "mgr123",
+        "role": "manager",
+        "name": "Engineering Manager"
+    },
+    {
+        "username": "developer",
+        "password": "dev123",
+        "role": "developer",
+        "name": "Backend Developer"
+    }
+]

@@ -430,6 +430,8 @@ FASE 5: Konten → cicd.md, gitops.md, infrastructure.md, monitoring/*.md, sideb
 FASE 6: Custom Pages → Tabel statis → Refactor ke halaman dinamis + manifest.json
    ↓
 FASE 7: Dashboard → DeployDashboard komponen, integrasi ke home page
+   ↓
+FASE 8: Auth → Static auth system, role-based access, login/logout, protected routes
 ```
 
 ---
@@ -442,8 +444,12 @@ FASE 7: Dashboard → DeployDashboard komponen, integrasi ke home page
 | `sidebars.ts` | Mengimpor dari `sidebarConfig.ts` untuk generate sidebar |
 | `src/utils/sidebarConfig.ts` | Logic sidebar dinamis (per-environment, per-role) |
 | `src/pages/index.tsx` | Home page dengan DeployDashboard |
-| `src/pages/deploy-table.tsx` | Halaman tabel dinamis dengan tab sistem |
+| `src/pages/deploy-table.tsx` | Halaman tabel dinamis dengan tab sistem (protected) |
+| `src/pages/login.tsx` | Halaman login |
+| `src/context/AuthContext.tsx` | Global auth state via React Context |
+| `src/theme/Root.tsx` | Docusaurus wrapper — menyuntikkan AuthProvider |
 | `src/components/DeployDashboard/index.tsx` | Komponen dashboard utama |
+| `static/data/users.json` | **Database user statis** — edit untuk tambah/ubah user |
 | `static/data/deploy/manifest.json` | **Konfigurasi sumber data deployment** — edit ini untuk tambah namespace |
 | `static/data/deploy/*.json` | Data deployment mentah per namespace |
 | `.github/workflows/deploy.yml` | CI/CD pipeline auto-deploy |
@@ -488,6 +494,152 @@ make dev
 # - Tambah entry di static/data/deploy/manifest.json
 # - Done — tab muncul otomatis
 ```
+
+---
+
+## FASE 8 — Simple Auth System
+
+### 8.1 Tujuan
+
+Membatasi akses halaman **Table** (`/deploy-table`) hanya untuk user yang sudah login. Sistem auth bersifat client-side (cocok untuk static site) menggunakan file JSON statis sebagai "database" user.
+
+⚠️ **Catatan Keamanan:** Password disimpan plain-text di `users.json` yang dapat diakses publik. Ini cocok untuk **internal tool** bukan untuk produksi yang membutuhkan keamanan tinggi. Untuk keamanan sesungguhnya, gunakan backend API atau layanan auth seperti Auth0.
+
+### 8.2 Desain Sistem Auth
+
+#### User Database — `static/data/users.json`
+
+```json
+[
+  { "username": "devops",    "password": "devops123",  "role": "devops",     "name": "DevOps Engineer" },
+  { "username": "manager",   "password": "mgr123",     "role": "manager",    "name": "Engineering Manager" },
+  { "username": "developer", "password": "dev123",     "role": "developer",  "name": "Backend Developer" }
+]
+```
+
+#### Role & Akses
+
+| Role | Deskripsi | Akses Table |
+|---|---|---|
+| `devops` | DevOps Engineer | ✅ Ya |
+| `manager` | Engineering Manager | ✅ Ya |
+| `developer` | Backend Developer | ✅ Ya |
+| (tidak login) | Guest / Public | ❌ Redirect ke `/login` |
+
+Semua role yang sudah login boleh akses Table. Role dibuat untuk kemungkinan pengembangan granular di masa depan.
+
+### 8.3 Arsitektur Auth
+
+```
+App
+ └── Root.tsx (Docusaurus wrapper)
+      └── AuthProvider (React Context)
+           ├── login()   → fetch users.json → cari match → simpan ke localStorage
+           ├── logout()  → hapus localStorage
+           └── user      → state: { username, name, role } | null
+
+Halaman protected (deploy-table.tsx)
+ └── useAuth() → cek isAuthenticated
+      ├── Jika false → redirect ke /login
+      └── Jika true  → render tabel + UserBadge (nama + role + tombol logout)
+```
+
+### 8.4 File yang Dibuat
+
+#### `src/context/AuthContext.tsx`
+
+React Context yang menjadi sumber kebenaran auth di seluruh aplikasi:
+
+```ts
+interface User {
+  username: string;
+  role: 'devops' | 'manager' | 'developer';
+  name: string;
+}
+
+interface AuthContextType {
+  user: User | null;
+  login: (username: string, password: string) => Promise<'ok' | 'invalid'>;
+  logout: () => void;
+  isAuthenticated: boolean;
+  isLoading: boolean;
+}
+```
+
+Logika:
+- `login()` → fetch `/data/users.json` → cocokkan username + password → simpan session di `localStorage`
+- `logout()` → hapus data dari `localStorage`
+- Saat init (`useEffect`) → cek `localStorage` untuk restore session yang sudah ada
+- `isLoading` → true selama restore session dari localStorage (mencegah flash login page)
+
+#### `src/theme/Root.tsx`
+
+Docusaurus mendukung override file `src/theme/Root.tsx` sebagai wrapper paling luar dari seluruh aplikasi. Digunakan untuk menyuntikkan `AuthProvider`:
+
+```tsx
+export default function Root({ children }) {
+  return <AuthProvider>{children}</AuthProvider>;
+}
+```
+
+#### `src/pages/login.tsx`
+
+Halaman login di route `/login`:
+- Form username + password
+- Tombol "Login" → panggil `login()` dari AuthContext
+- Jika sukses → redirect ke `/deploy-table`
+- Jika error → tampilkan pesan "Username atau password salah"
+- Jika sudah login → otomatis redirect ke `/deploy-table`
+- Tampilan: kartu login centered, dark mode compatible
+
+#### `src/pages/deploy-table.tsx` (diupdate)
+
+Ditambahkan auth guard di awal:
+```tsx
+const { isAuthenticated, isLoading } = useAuth();
+
+useEffect(() => {
+  if (!isLoading && !isAuthenticated) {
+    // Redirect ke login
+    window.location.href = '/login';
+  }
+}, [isAuthenticated, isLoading]);
+```
+
+Ditambahkan `UserBadge` di header halaman:
+```
+┌──────────────────────────────────────┐
+│ 👤 DevOps Engineer  [devops]  [Logout] │
+└──────────────────────────────────────┘
+```
+
+### 8.5 Alur Login
+
+```
+User buka /deploy-table
+    → AuthContext cek localStorage
+    → Tidak ada session → redirect /login
+
+User isi username + password → klik Login
+    → fetch /data/users.json
+    → Cocokkan credentials
+    ├── Cocok → simpan ke localStorage → redirect /deploy-table
+    └── Tidak cocok → tampilkan error
+
+User klik Logout
+    → hapus localStorage
+    → redirect /login
+```
+
+### 8.6 Pertimbangan Keamanan
+
+| Aspek | Implementasi Saat Ini | Ideal untuk Produksi |
+|---|---|---|
+| Password storage | Plain-text di JSON publik | Hashed (bcrypt) di backend |
+| Session | localStorage (persists browser restart) | HTTP-only cookie / JWT dengan expiry |
+| Token | Tidak ada | JWT signed dengan secret key |
+| HTTPS | Bergantung pada hosting | Wajib HTTPS |
+| Rate limiting | Tidak ada | Limit login attempt |
 
 ---
 

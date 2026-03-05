@@ -2,6 +2,7 @@ import React, { useState, useEffect, useMemo } from 'react';
 import Layout from '@theme/Layout';
 import styles from './table.module.css';
 import tabStyles from './deploy-table.module.css';
+import { useAuth } from '../context/AuthContext';
 
 interface ManifestEntry {
     slug: string;
@@ -41,6 +42,38 @@ const NODETYPE_STYLE: Record<string, string> = {
     front: styles.env_production,
     back: styles.env_staging,
 };
+
+const ROLE_COLOR: Record<string, string> = {
+    devops: '#4f46e5',
+    manager: '#0891b2',
+    developer: '#16a34a',
+};
+
+function UserBadge(): React.ReactElement {
+    const { user, logout } = useAuth();
+    if (!user) return <></>;
+    return (
+        <div className={tabStyles.userBadge}>
+            <span className={tabStyles.userIcon}>👤</span>
+            <span className={tabStyles.userName}>{user.name}</span>
+            <span
+                className={tabStyles.userRole}
+                style={{ background: ROLE_COLOR[user.role] ?? '#555' }}
+            >
+                {user.role}
+            </span>
+            <button
+                className={tabStyles.logoutBtn}
+                onClick={() => {
+                    logout();
+                    window.location.href = '/login';
+                }}
+            >
+                Logout
+            </button>
+        </div>
+    );
+}
 
 function DeployTable({ entry }: { entry: ManifestEntry }) {
     const [data, setData] = useState<DeployData[]>([]);
@@ -142,26 +175,51 @@ function DeployTable({ entry }: { entry: ManifestEntry }) {
 }
 
 export default function DeployTablePage(): React.ReactElement {
+    const { isAuthenticated, isLoading } = useAuth();
     const [manifest, setManifest] = useState<ManifestEntry[]>([]);
     const [activeSlug, setActiveSlug] = useState<string | null>(null);
 
+    // Auth guard — redirect to /login if not authenticated
     useEffect(() => {
+        if (!isLoading && !isAuthenticated) {
+            window.location.href = '/login';
+        }
+    }, [isAuthenticated, isLoading]);
+
+    useEffect(() => {
+        if (!isAuthenticated) return;
         fetch('/data/deploy/manifest.json')
             .then((r) => r.json())
             .then((entries: ManifestEntry[]) => {
                 setManifest(entries);
                 if (entries.length > 0) setActiveSlug(entries[0].slug);
             });
-    }, []);
+    }, [isAuthenticated]);
+
+    // Show spinner while checking auth
+    if (isLoading || !isAuthenticated) {
+        return (
+            <Layout title="Deploy Tables">
+                <div className={tabStyles.authLoading}>
+                    <div className={styles.spinner} />
+                    <span>Checking session…</span>
+                </div>
+            </Layout>
+        );
+    }
 
     const active = manifest.find((e) => e.slug === activeSlug);
 
     return (
         <Layout title="Deploy Tables" description="Dynamic deployment table loaded from manifest">
             <main className={styles.container}>
+                {/* Page header with user badge */}
                 <div className={tabStyles.pageHeader}>
-                    <h1 className={styles.title}>Deployment Tables</h1>
-                    <p className={styles.subtitle}>Data dari <code>/data/deploy/manifest.json</code></p>
+                    <div>
+                        <h1 className={styles.title}>Deployment Tables</h1>
+                        <p className={styles.subtitle}>Data dari <code>/data/deploy/manifest.json</code></p>
+                    </div>
+                    <UserBadge />
                 </div>
 
                 {/* Tab strip */}

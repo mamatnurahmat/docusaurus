@@ -1,5 +1,68 @@
 .pageHeader {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
     margin-bottom: 1rem;
+}
+
+/* ── User Badge ── */
+.userBadge {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--ifm-background-surface-color);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: 999px;
+    padding: 0.35rem 0.75rem;
+    font-size: 0.85rem;
+}
+
+.userIcon {
+    font-size: 1rem;
+}
+
+.userName {
+    font-weight: 600;
+}
+
+.userRole {
+    color: white;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+}
+
+.logoutBtn {
+    background: transparent;
+    border: 1.5px solid var(--ifm-color-emphasis-300);
+    border-radius: 6px;
+    padding: 0.2rem 0.6rem;
+    font-size: 0.78rem;
+    font-weight: 600;
+    cursor: pointer;
+    color: var(--ifm-font-color-base);
+    transition: background 0.15s, color 0.15s;
+}
+
+.logoutBtn:hover {
+    background: #fee2e2;
+    color: #b91c1c;
+    border-color: #fecaca;
+}
+
+/* Auth loading state */
+.authLoading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 6rem;
+    color: var(--ifm-color-secondary-darkest);
 }
 
 .tabStrip {
