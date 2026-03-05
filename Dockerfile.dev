@@ -1,0 +1,18 @@
+FROM node:18-alpine
+
+WORKDIR /app
+
+# Salin package.json dan package-lock.json terlebih dahulu untuk optimasi cache
+COPY package*.json ./
+
+# Instal semua dependensi
+RUN npm install
+
+# Salin seluruh kode sumber
+COPY . .
+
+# Ekspos port 3000
+EXPOSE 3000
+
+# Jalankan Docusaurus dengan host 0.0.0.0 agar bisa diakses dari luar container
+CMD ["npm", "start", "--", "--host", "0.0.0.0"]
