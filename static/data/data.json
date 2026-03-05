@@ -1,0 +1,74 @@
+[
+    {
+        "name": "auth-service",
+        "environment": "production",
+        "version": "v2.4.1",
+        "status": "running",
+        "replicas": 3,
+        "owner": "team-platform",
+        "updated": "2026-03-01"
+    },
+    {
+        "name": "business-service",
+        "environment": "production",
+        "version": "v1.9.0",
+        "status": "running",
+        "replicas": 5,
+        "owner": "team-backend",
+        "updated": "2026-02-28"
+    },
+    {
+        "name": "notification-service",
+        "environment": "production",
+        "version": "v1.2.3",
+        "status": "running",
+        "replicas": 2,
+        "owner": "team-backend",
+        "updated": "2026-02-25"
+    },
+    {
+        "name": "api-gateway",
+        "environment": "production",
+        "version": "v3.1.0",
+        "status": "running",
+        "replicas": 2,
+        "owner": "team-platform",
+        "updated": "2026-03-02"
+    },
+    {
+        "name": "auth-service",
+        "environment": "staging",
+        "version": "v2.5.0-rc1",
+        "status": "running",
+        "replicas": 1,
+        "owner": "team-platform",
+        "updated": "2026-03-05"
+    },
+    {
+        "name": "business-service",
+        "environment": "staging",
+        "version": "v1.10.0-rc2",
+        "status": "degraded",
+        "replicas": 1,
+        "owner": "team-backend",
+        "updated": "2026-03-04"
+    },
+    {
+        "name": "notification-service",
+        "environment": "staging",
+        "version": "v1.3.0-rc1",
+        "status": "stopped",
+        "replicas": 0,
+        "owner": "team-backend",
+        "updated": "2026-03-03"
+    },
+    {
+        "name": "monitoring-stack",
+        "environment": "production",
+        "version": "v1.0.5",
+        "status": "running",
+        "replicas": 1,
+        "owner": "team-infra",
+        "updated": "2026-02-20"
+    }
+]

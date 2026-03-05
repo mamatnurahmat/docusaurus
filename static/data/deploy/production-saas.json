@@ -1,0 +1,1802 @@
+[
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLW5naW54LXdzLXByb3h5",
+        "manifest": "nginx-ws-proxy",
+        "replicas": 1,
+        "image": "nginx:stable",
+        "nodetype": "front",
+        "port": 80,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": null,
+        "regcred": null,
+        "volume": [
+            {
+                "configMap": {
+                    "defaultMode": 420,
+                    "name": "nginx-ws-config"
+                },
+                "name": "nginx-config-volume"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/nginx/nginx.conf",
+                "name": "nginx-config-volume",
+                "subPath": "nginx.conf"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXMzLW1pbmlv",
+        "manifest": "s3-minio",
+        "replicas": 1,
+        "image": "loyaltolpi/s3-minio:cb70b29",
+        "nodetype": "back",
+        "port": 9193,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "s3-minio",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-s3-minio"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYXBpZ2F0ZXdheQ==",
+        "manifest": "saas-apigateway",
+        "replicas": 1,
+        "image": "loyaltolpi/saas-apigateway:v4.1.0",
+        "nodetype": "front",
+        "port": 8005,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-apigateway",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtYWNjZXNzLW1hbmFnZXI=",
+        "manifest": "saas-be-access-manager",
+        "replicas": 0,
+        "image": "loyaltolpi/saas-be-access-manager:v1.0.0",
+        "nodetype": "front",
+        "port": 9140,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-access-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtYWNjZXNzLW1vZHVsZQ==",
+        "manifest": "saas-be-access-module",
+        "replicas": 0,
+        "image": "loyaltolpi/saas-be-access-module:v1.0.1",
+        "nodetype": "back",
+        "port": 80,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-access-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtYWRtaW4tbWFuYWdlcg==",
+        "manifest": "saas-be-admin-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-admin-manager:v3.3.0",
+        "nodetype": "front",
+        "port": 9510,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-admin-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-admin-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtYWRtaW4tbW9kdWxl",
+        "manifest": "saas-be-admin-module",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-admin-module:v2.3.0",
+        "nodetype": "back",
+        "port": 9521,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-admin-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-admin-module"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtYW5ub3VuY2VtZW50LW1hbmFnZXI=",
+        "manifest": "saas-be-announcement-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-announcement-manager:v2.3.0",
+        "nodetype": "front",
+        "port": 9701,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-announcement-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-announcement-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtYW5ub3VuY2VtZW50LW1vZHVsZQ==",
+        "manifest": "saas-be-announcement-module",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-announcement-module:v2.3.0",
+        "nodetype": "back",
+        "port": 9702,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-announcement-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-announcement-module"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtYXVkaXR0cmFpbC1tYW5hZ2Vy",
+        "manifest": "saas-be-audittrail-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-audittrail-manager:v2.3.0",
+        "nodetype": "front",
+        "port": 9601,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-audittrail-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-audittrail-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtYXVkaXR0cmFpbC1tb2R1bGU=",
+        "manifest": "saas-be-audittrail-module",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-audittrail-module:v2.3.1",
+        "nodetype": "back",
+        "port": 9603,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-audittrail-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-audittrail-module"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtY2xpZW50YXBpLW1hbmFnZXI=",
+        "manifest": "saas-be-clientapi-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-clientapi-manager:v2.3.0",
+        "nodetype": "front",
+        "port": 9303,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-clientapi-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-clientapi-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtY2xpZW50YXBpLW1vZHVsZQ==",
+        "manifest": "saas-be-clientapi-module",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-clientapi-module:v2.3.0",
+        "nodetype": "back",
+        "port": 9401,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-clientapi-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-clientapi-module"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtY29uZmlnLW1hbmFnZXI=",
+        "manifest": "saas-be-config-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-config-manager:v2.3.0",
+        "nodetype": "front",
+        "port": 9301,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-config-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-config-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtY29uZmlnLW1vZHVsZQ==",
+        "manifest": "saas-be-config-module",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-config-module:v2.3.0",
+        "nodetype": "back",
+        "port": 80,
+        "port2": 9402,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-config-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-config-module"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtZGFzaGJvYXJkLW1hbmFnZXI=",
+        "manifest": "saas-be-dashboard-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-dashboard-manager:v1.3.0",
+        "nodetype": "front",
+        "port": 9560,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-dashboard-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-dashboard-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtZGFzaGJvYXJkLW1vZHVsZQ==",
+        "manifest": "saas-be-dashboard-module",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-dashboard-module:v1.3.0",
+        "nodetype": "back",
+        "port": 9562,
+        "port2": 9561,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-dashboard-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-dashboard-module"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtZG9jcy1tYW5hZ2Vy",
+        "manifest": "saas-be-docs-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-docs-manager:v2.0.0",
+        "nodetype": "front",
+        "port": 9710,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-docs-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtZG9jcy1tb2R1bGU=",
+        "manifest": "saas-be-docs-module",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-docs-module:v2.0.0",
+        "nodetype": "back",
+        "port": 9711,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-docs-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtbG95YWx0eS1tYW5hZ2Vy",
+        "manifest": "saas-be-loyalty-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-loyalty-manager:v3.3.0",
+        "nodetype": "front",
+        "port": 9540,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-loyalty-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-loyalty-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtbG95YWx0eS1tb2R1bGU=",
+        "manifest": "saas-be-loyalty-module",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-loyalty-module:v3.3.1",
+        "nodetype": "back",
+        "port": 9542,
+        "port2": 9541,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-loyalty-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-loyalty-module"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtbWVzc2FnaW5nLW1hbmFnZXI=",
+        "manifest": "saas-be-messaging-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-messaging-manager:v1.3.0",
+        "nodetype": "front",
+        "port": 9820,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-messaging-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-messaging-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtbWVzc2FnaW5nLW1vZHVsZQ==",
+        "manifest": "saas-be-messaging-module",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-messaging-module:v1.3.0",
+        "nodetype": "back",
+        "port": 9830,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-messaging-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-messaging-module"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtbWlkZGxld2FyZS1tYW5hZ2Vy",
+        "manifest": "saas-be-middleware-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-middleware-manager:v2.3.0",
+        "nodetype": "front",
+        "port": 9201,
+        "port2": 9202,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-middleware-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-middleware-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtbm90aWZpY2F0aW9uLW1hbmFnZXI=",
+        "manifest": "saas-be-notification-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/saas-be-notification-manager:v1.0.2",
+        "nodetype": "front",
+        "port": 9070,
+        "port2": 9071,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-notification-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-notification-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtcGVybWlzc2lvbi1tYW5hZ2Vy",
+        "manifest": "saas-be-permission-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-permission-manager:v3.3.0",
+        "nodetype": "front",
+        "port": 9502,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-permission-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-permission-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            },
+            {
+                "mountPath": "/.app.config",
+                "name": "file-config-volume",
+                "subPath": ".app.config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtcGVybWlzc2lvbi1tb2R1bGU=",
+        "manifest": "saas-be-permission-module",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-permission-module:v3.3.0",
+        "nodetype": "back",
+        "port": 9020,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-permission-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-permission-module"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtcHJvZmlsZS1tYW5hZ2Vy",
+        "manifest": "saas-be-profile-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-profile-manager:v3.3.0",
+        "nodetype": "front",
+        "port": 9501,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-profile-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-profile-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            },
+            {
+                "mountPath": "/.app.config",
+                "name": "file-config-volume",
+                "subPath": ".app.config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtcHJvZmlsZS1tb2R1bGU=",
+        "manifest": "saas-be-profile-module",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-profile-module:v3.3.0",
+        "nodetype": "back",
+        "port": 9503,
+        "port2": 9010,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-profile-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-profile-module"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtcmVjb25jaWxlLW1hbmFnZXI=",
+        "manifest": "saas-be-reconcile-manager",
+        "replicas": 0,
+        "image": "loyaltolpi/saas-be-reconcile-manager:v1.0.0",
+        "nodetype": "front",
+        "port": 9550,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-reconcile-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-reconcile-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtcmVjb25jaWxlLW1vZHVsZQ==",
+        "manifest": "saas-be-reconcile-module",
+        "replicas": 0,
+        "image": "loyaltolpi/saas-be-reconcile-module:v1.0.0",
+        "nodetype": "back",
+        "port": 80,
+        "port2": 9551,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-reconcile-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-reconcile-module"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtdGVzdC1tYW5hZ2Vy",
+        "manifest": "saas-be-test-manager",
+        "replicas": 0,
+        "image": "nginx:alpine",
+        "nodetype": "front",
+        "port": 80,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-test-manager",
+        "regcred": null,
+        "volume": null,
+        "mounts": null,
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtdGVzdC1tb2R1bGU=",
+        "manifest": "saas-be-test-module",
+        "replicas": 0,
+        "image": "nginx:alpine",
+        "nodetype": "back",
+        "port": 80,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-test-module",
+        "regcred": null,
+        "volume": null,
+        "mounts": null,
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtdHJhbnNhY3Rpb25zLW1hbmFnZXI=",
+        "manifest": "saas-be-transactions-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-transactions-manager:v2.3.2",
+        "nodetype": "front",
+        "port": 9540,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-transactions-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-transactions-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtdHJhbnNhY3Rpb25zLW1vZHVsZQ==",
+        "manifest": "saas-be-transactions-module",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-transactions-module:v2.3.3",
+        "nodetype": "back",
+        "port": 9542,
+        "port2": 9543,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-transactions-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-transactions-module"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtd2ViaG9vay1tYW5hZ2Vy",
+        "manifest": "saas-be-webhook-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-webhook-manager:v1.3.0",
+        "nodetype": "front",
+        "port": 9544,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-webhook-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-webhook-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtd29ya2Zsb3c=",
+        "manifest": "saas-be-workflow",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-workflow:v2.3.0",
+        "nodetype": "front",
+        "port": 7234,
+        "port2": 50051,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-workflow",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-workflow"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtd29ya3NwYWNlLW1hbmFnZXI=",
+        "manifest": "saas-be-workspace-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-workspace-manager:v2.3.0",
+        "nodetype": "front",
+        "port": 9801,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-workspace-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-workspace-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtd29ya3NwYWNlYWRtaW4tbWFuYWdlcg==",
+        "manifest": "saas-be-workspaceadmin-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-workspaceadmin-manager:v2.3.0",
+        "nodetype": "front",
+        "port": 9821,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-workspaceadmin-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-workspaceadmin-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtd29ya3NwYWNlY2xpZW50LW1hbmFnZXI=",
+        "manifest": "saas-be-workspaceclient-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-workspaceclient-manager:v2.3.0",
+        "nodetype": "front",
+        "port": 9812,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-workspaceclient-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-workspaceclient-manager"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1zYWFzLXNhYXMtYmUtd29ya3NwYWNlY2xpZW50LW1vZHVsZQ==",
+        "manifest": "saas-be-workspaceclient-module",
+        "replicas": 2,
+        "image": "loyaltolpi/saas-be-workspaceclient-module:v2.3.0",
+        "nodetype": "back",
+        "port": 9811,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "saas-be-workspaceclient-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-saas-be-workspaceclient-module"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-saas"
+    }
+]

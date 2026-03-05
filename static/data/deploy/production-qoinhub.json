@@ -1,0 +1,2354 @@
+[
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWFwaWdhdGV3YXk=",
+        "manifest": "plus-apigateway",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-apigateway:v2.0.6",
+        "nodetype": "front",
+        "port": 8010,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-apigateway",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "krakend-license-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "krakend-license"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/etc/krakend/LICENSE",
+                "name": "krakend-license-volume",
+                "subPath": "LICENSE"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWFjY291bnR0cnhsaW5rZWQtbW9kdWxl",
+        "manifest": "plus-be-accounttrxlinked-module",
+        "replicas": 0,
+        "image": "loyaltolpi/plus-be-accounttrxlinked-module:sandbox-dev-6548c65",
+        "nodetype": "back",
+        "port": 9112,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-accounttrxlinked-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWFjY291bnR1c2VybGlua2VkLW1vZHVsZQ==",
+        "manifest": "plus-be-accountuserlinked-module",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-accounttrxlinked-module:v1.0.1",
+        "nodetype": "back",
+        "port": 9112,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-accountuserlinked-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWFkbWlucGctbWFuYWdlcg==",
+        "manifest": "plus-be-adminpg-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-adminpg-manager:v1.0.13",
+        "nodetype": "front",
+        "port": 3013,
+        "port2": 9107,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-adminpg-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWFsdG9pbnRlcmZhY2UtbWFuYWdlcg==",
+        "manifest": "plus-be-altointerface-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-altointerface-manager:v1.0.8",
+        "nodetype": "front",
+        "port": 3017,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-altointerface-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWFudGljc3JmLW1hbmFnZXI=",
+        "manifest": "plus-be-anticsrf-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-anticsrf-manager:v1.0.1",
+        "nodetype": "front",
+        "port": 5002,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-anticsrf-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWFwcG1lcmNoYW50LW1hbmFnZXI=",
+        "manifest": "plus-be-appmerchant-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-appmerchant-manager:v1.0.6",
+        "nodetype": "front",
+        "port": 2334,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-appmerchant-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWF1ZGl0dHJhaWwtbW9kdWxl",
+        "manifest": "plus-be-audittrail-module",
+        "replicas": 4,
+        "image": "loyaltolpi/plus-be-audittrail-module:v1.0.2",
+        "nodetype": "back",
+        "port": 80,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-audittrail-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWJhY2tlbmRtZXJjaGFudHNlcnZpY2UtbWFuYWdlcg==",
+        "manifest": "plus-be-backendmerchantservice-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-backendmerchantservice-manager:v1.1.1",
+        "nodetype": "front",
+        "port": 6270,
+        "port2": null,
+        "env": null,
+        "args": [
+            "dotnet",
+            "plus-be-backendmerchantservice-manager.dll",
+            "--environment=production"
+        ],
+        "helm": "plus-be-backendmerchantservice-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "DOTNET",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWJhZ2htYWMtbWFuYWdlcg==",
+        "manifest": "plus-be-baghmac-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-baghmac-manager:v1.0.3",
+        "nodetype": "front",
+        "port": 8081,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-baghmac-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWJhZ2ludGVyZmFjZS1tYW5hZ2Vy",
+        "manifest": "plus-be-baginterface-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-baginterface-manager:v1.0.10",
+        "nodetype": "front",
+        "port": 2310,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-baginterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWJuaWludGVyZmFjZS1tYW5hZ2Vy",
+        "manifest": "plus-be-bniinterface-manager",
+        "replicas": 0,
+        "image": "loyaltolpi/plus-be-bniinterface-manager:v1.0.0",
+        "nodetype": "front",
+        "port": 2301,
+        "port2": 9106,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-bniinterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWNhbGxiYWNrLW1hbmFnZXI=",
+        "manifest": "plus-be-callback-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-callback-manager:v1.0.22",
+        "nodetype": "front",
+        "port": 3015,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-callback-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWNsaWVudHBnLW1hbmFnZXI=",
+        "manifest": "plus-be-clientpg-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-clientpg-manager:v1.0.26",
+        "nodetype": "front",
+        "port": 9141,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-clientpg-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWNsaWVudHBnLW1vZHVsZQ==",
+        "manifest": "plus-be-clientpg-module",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-clientpg-module:v1.0.12",
+        "nodetype": "back",
+        "port": 80,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-clientpg-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWNvbmZpZy1tYW5hZ2Vy",
+        "manifest": "plus-be-config-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-config-manager:v1.0.3",
+        "nodetype": "front",
+        "port": 3010,
+        "port2": 9108,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-config-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWNvbmZpZy1tb2R1bGU=",
+        "manifest": "plus-be-config-module",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-config-module:v1.0.33",
+        "nodetype": "back",
+        "port": 9108,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-config-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWNyZWF0ZW9yZGVyLW1hbmFnZXI=",
+        "manifest": "plus-be-createorder-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-createorder-manager:v1.0.19",
+        "nodetype": "front",
+        "port": 5001,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-createorder-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWNyZWF0ZW9yZGVyc25hcC1tYW5hZ2Vy",
+        "manifest": "plus-be-createordersnap-manager",
+        "replicas": 6,
+        "image": "loyaltolpi/plus-be-createordersnap-manager:v1.0.32",
+        "nodetype": "front",
+        "port": 2323,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-createordersnap-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWRhc2hib2FyZC1tYW5hZ2Vy",
+        "manifest": "plus-be-dashboard-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-dashboard-manager:v1.0.16",
+        "nodetype": "front",
+        "port": 9111,
+        "port2": 9110,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-dashboard-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWRhc2hib2FyZC1tb2R1bGU=",
+        "manifest": "plus-be-dashboard-module",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-dashboard-module:v1.0.10",
+        "nodetype": "back",
+        "port": 9110,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-dashboard-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWRhdGF3YXJlaG91c2UtbW9kdWxl",
+        "manifest": "plus-be-datawarehouse-module",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-datawarehouse-module:v1.0.0",
+        "nodetype": "back",
+        "port": 9117,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-datawarehouse-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWRlYWN0aXZlbWVyY2hhbnQtbWFuYWdlcg==",
+        "manifest": "plus-be-deactivemerchant-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-deactivemerchant-manager:v1.0.0",
+        "nodetype": "front",
+        "port": 2347,
+        "port2": 9114,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-deactivemerchant-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWRlYWN0aXZlbWVyY2hhbnQtbW9kdWxl",
+        "manifest": "plus-be-deactivemerchant-module",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-deactivemerchant-module:v1.0.0",
+        "nodetype": "back",
+        "port": 80,
+        "port2": 9114,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-deactivemerchant-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWVuaGFuY2VkLXdvcmtmbG93",
+        "manifest": "plus-be-enhanced-workflow",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-enhanced-workflow:v1.0.0",
+        "nodetype": "front",
+        "port": 7234,
+        "port2": 50051,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-enhanced-workflow",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-plus-be-enhanced-workflow"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLWVzcGF5aW50ZXJmYWNlLW1hbmFnZXI=",
+        "manifest": "plus-be-espayinterface-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-espayinterface-manager:v1.0.19",
+        "nodetype": "front",
+        "port": 2303,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-espayinterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW1lcmNoYW50YWdlbmN5LW1vZHVsZQ==",
+        "manifest": "plus-be-merchantagency-module",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-merchantagency-module:v1.0.2",
+        "nodetype": "back",
+        "port": 9391,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-merchantagency-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW1lcmNoYW50b25ib2FyZC1tb2R1bGU=",
+        "manifest": "plus-be-merchantonboard-module",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-merchantonboard-module:v1.0.0",
+        "nodetype": "back",
+        "port": 9214,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-merchantonboard-module",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW1lcmNoYW50cGctbWFuYWdlcg==",
+        "manifest": "plus-be-merchantpg-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-merchantpg-manager:v1.0.26",
+        "nodetype": "front",
+        "port": 3011,
+        "port2": 9107,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-merchantpg-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW1lcmNoYW50cGctbW9kdWxl",
+        "manifest": "plus-be-merchantpg-module",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-merchantpg-module:v1.0.30",
+        "nodetype": "back",
+        "port": 9107,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-merchantpg-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW1lcmNoYW50cXJpcy1tYW5hZ2Vy",
+        "manifest": "plus-be-merchantqris-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-merchantqris-manager:v1.0.0",
+        "nodetype": "front",
+        "port": 3016,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-merchantqris-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW1lcmNoYW50cXJpcy1tb2R1bGU=",
+        "manifest": "plus-be-merchantqris-module",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-merchantqris-module:v1.0.1",
+        "nodetype": "back",
+        "port": 9011,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-merchantqris-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW1lcmNoYW50dXNlcmFwcC1tYW5hZ2Vy",
+        "manifest": "plus-be-merchantuserapp-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-merchantuserapp-manager:v1.0.0",
+        "nodetype": "front",
+        "port": 2343,
+        "port2": 2344,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-merchantuserapp-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW1lcmNoYW50dXNlcmFwcC1tb2R1bGU=",
+        "manifest": "plus-be-merchantuserapp-module",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-merchantuserapp-module:v1.0.0",
+        "nodetype": "back",
+        "port": 2344,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-merchantuserapp-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW1lc3NhZ2luZy1tYW5hZ2Vy",
+        "manifest": "plus-be-messaging-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-messaging-manager:v1.0.7",
+        "nodetype": "front",
+        "port": 2325,
+        "port2": 9115,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-messaging-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW1lc3NhZ2luZy1tb2R1bGU=",
+        "manifest": "plus-be-messaging-module",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-messaging-module:v1.0.2",
+        "nodetype": "back",
+        "port": 9115,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-messaging-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW1pbmlzZGtpbnRlcmZhY2UtbWFuYWdlcg==",
+        "manifest": "plus-be-minisdkinterface-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-minisdkinterface-manager:v1.1.2",
+        "nodetype": "front",
+        "port": 6350,
+        "port2": null,
+        "env": null,
+        "args": [
+            "dotnet",
+            "plus-be-minisdkinterface-manager.dll",
+            "--environment=production"
+        ],
+        "helm": "plus-be-minisdkinterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "DOTNET",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW1pbmlzZGtpbnRlcmZhY2UtbW9kdWxl",
+        "manifest": "plus-be-minisdkinterface-module",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-minisdkinterface-module:v1.1.2",
+        "nodetype": "back",
+        "port": 80,
+        "port2": null,
+        "env": null,
+        "args": [
+            "dotnet",
+            "plus-be-minisdkinterface-module.dll",
+            "--environment=production"
+        ],
+        "helm": "plus-be-minisdkinterface-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "DOTNET",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW5ldHptZWludGVyZmFjZS1tYW5hZ2Vy",
+        "manifest": "plus-be-netzmeinterface-manager",
+        "replicas": 0,
+        "image": "loyaltolpi/plus-be-netzmeinterface-manager:1.16.0",
+        "nodetype": "front",
+        "port": 2326,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-netzmeinterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW50dGludGVyZmFjZS1tYW5hZ2Vy",
+        "manifest": "plus-be-nttinterface-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-nttinterface-manager:v1.0.4",
+        "nodetype": "front",
+        "port": 2309,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-nttinterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLW95aW50ZXJmYWNlLW1hbmFnZXI=",
+        "manifest": "plus-be-oyinterface-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-oyinterface-manager:v1.0.10",
+        "nodetype": "front",
+        "port": 2311,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-oyinterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXBnbG9nZ2VyLW1vZHVsZQ==",
+        "manifest": "plus-be-pglogger-module",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-pglogger-module:v1.0.0",
+        "nodetype": "back",
+        "port": 80,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-pglogger-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXFvaW5jYXNoaW50ZXJmYWNlLW1hbmFnZXI=",
+        "manifest": "plus-be-qoincashinterface-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-qoincashinterface-manager:v1.0.3",
+        "nodetype": "front",
+        "port": 2308,
+        "port2": 9106,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-qoincashinterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXFvaW5wYXlzZXJ2aWNlLW1hbmFnZXI=",
+        "manifest": "plus-be-qoinpayservice-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-qoinpayservice-manager:v1.0.1",
+        "nodetype": "front",
+        "port": 6220,
+        "port2": null,
+        "env": null,
+        "args": [
+            "dotnet",
+            "plus-be-qoinpayservice-manager.dll",
+            "--environment=production"
+        ],
+        "helm": "plus-be-qoinpayservice-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "DOTNET",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXFvaW5wYXlzZXJ2aWNlaW50ZXJmYWNlLW1hbmFnZXI=",
+        "manifest": "plus-be-qoinpayserviceinterface-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-qoinpayserviceinterface-manager:v1.0.1",
+        "nodetype": "front",
+        "port": 80,
+        "port2": null,
+        "env": null,
+        "args": [
+            "dotnet",
+            "plus-be-qoinpayserviceinterface-manager.dll",
+            "--environment=production"
+        ],
+        "helm": "plus-be-qoinpayserviceinterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "DOTNET",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXFyaXNpbnRlcmZhY2UtbWFuYWdlcg==",
+        "manifest": "plus-be-qrisinterface-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-qrisinterface-manager:v1.1.12",
+        "nodetype": "front",
+        "port": 2313,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-qrisinterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXJlZnVuZC1tYW5hZ2Vy",
+        "manifest": "plus-be-refund-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-refund-manager:v1.0.6",
+        "nodetype": "front",
+        "port": 2320,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-refund-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXJlZnVuZC1tb2R1bGU=",
+        "manifest": "plus-be-refund-module",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-refund-module:v1.0.3",
+        "nodetype": "back",
+        "port": 9109,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-refund-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXJlcG9ydGluZy1tYW5hZ2Vy",
+        "manifest": "plus-be-reporting-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-reporting-manager:v1.0.7",
+        "nodetype": "front",
+        "port": 2333,
+        "port2": 9116,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-reporting-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXJlcG9ydGluZy1tb2R1bGU=",
+        "manifest": "plus-be-reporting-module",
+        "replicas": 4,
+        "image": "loyaltolpi/plus-be-reporting-module:v1.0.29",
+        "nodetype": "back",
+        "port": 9116,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-reporting-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXNldHRsZW1lbnQtbWFuYWdlcg==",
+        "manifest": "plus-be-settlement-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-settlement-manager:v1.0.17",
+        "nodetype": "front",
+        "port": 2307,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-settlement-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXNldHRsZW1lbnRwZy1tb2R1bGU=",
+        "manifest": "plus-be-settlementpg-module",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-settlementpg-module:v1.0.1",
+        "nodetype": "back",
+        "port": 9110,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-settlementpg-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXNuYXBiaWVtb25leWludGVyZmFjZS1tYW5hZ2Vy",
+        "manifest": "plus-be-snapbiemoneyinterface-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-snapbiemoneyinterface-manager:v1.0.5",
+        "nodetype": "front",
+        "port": 2324,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-snapbiemoneyinterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXNuYXBiaWludGVyZmFjZS1tYW5hZ2Vy",
+        "manifest": "plus-be-snapbiinterface-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-snapbiinterface-manager:v1.0.23",
+        "nodetype": "front",
+        "port": 2327,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-snapbiinterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXN3aXRjaHJpbnRpc2ludGVyZmFjZS1tYW5hZ2Vy",
+        "manifest": "plus-be-switchrintisinterface-manager",
+        "replicas": 3,
+        "image": "loyaltolpi/plus-be-switchrintisinterface-manager:v1.4.1",
+        "nodetype": "front",
+        "port": 80,
+        "port2": 7001,
+        "env": [
+            {
+                "name": "ASPNETCORE_ENVIRONMENT",
+                "value": "production"
+            }
+        ],
+        "args": null,
+        "helm": "plus-be-switchrintisinterface-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "DOTNET",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXN3aXRjaHJpbnRpc3NlcnZpY2UtbWFuYWdlcg==",
+        "manifest": "plus-be-switchrintisservice-manager",
+        "replicas": 3,
+        "image": "loyaltolpi/plus-be-switchrintisservice-manager:v1.7.2",
+        "nodetype": "front",
+        "port": 6230,
+        "port2": null,
+        "env": null,
+        "args": [
+            "dotnet",
+            "plus-be-switchrintisservice-manager.dll",
+            "--environment=production"
+        ],
+        "helm": "plus-be-switchrintisservice-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "DOTNET",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXRlbXBvcmFsLXdvcmtmbG93",
+        "manifest": "plus-be-temporal-workflow",
+        "replicas": 0,
+        "image": "loyaltolpi/plus-be-temporal-workflow:v1.0.0",
+        "nodetype": "back",
+        "port": 7234,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-temporal-workflow",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXRpY2tldC1tYW5hZ2Vy",
+        "manifest": "plus-be-ticket-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-ticket-manager:v1.0.6",
+        "nodetype": "front",
+        "port": 8813,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-ticket-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXRpY2tldC1tb2R1bGU=",
+        "manifest": "plus-be-ticket-module",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-ticket-module:v1.0.4",
+        "nodetype": "back",
+        "port": 80,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-ticket-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXRpY2tldGluZy1tYW5hZ2Vy",
+        "manifest": "plus-be-ticketing-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-ticketing-manager:v1.0.7",
+        "nodetype": "front",
+        "port": 9040,
+        "port2": 9041,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-ticketing-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXRpY2tldGluZy1tb2R1bGU=",
+        "manifest": "plus-be-ticketing-module",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-ticketing-module:v1.0.9",
+        "nodetype": "back",
+        "port": 9041,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-ticketing-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXRyYW5zYWN0aW9uLW1hbmFnZXI=",
+        "manifest": "plus-be-transaction-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-transaction-manager:v1.0.1",
+        "nodetype": "front",
+        "port": 2317,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-transaction-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXRyYW5zYWN0aW9uLW1vZHVsZQ==",
+        "manifest": "plus-be-transaction-module",
+        "replicas": 6,
+        "image": "loyaltolpi/plus-be-transaction-module:v1.0.51",
+        "nodetype": "back",
+        "port": 9106,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-transaction-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXRyYW5zYWN0aW9ubGlzdC1tYW5hZ2Vy",
+        "manifest": "plus-be-transactionlist-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-transactionlist-manager:v1.1.13",
+        "nodetype": "front",
+        "port": 2321,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-transactionlist-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXdlYmFkbWlubWVyY2hhbnRhZ2VuY3ktbWFuYWdlcg==",
+        "manifest": "plus-be-webadminmerchantagency-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-webadminmerchantagency-manager:v1.0.6",
+        "nodetype": "front",
+        "port": 2342,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-webadminmerchantagency-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXdlYnZpZXcyLW1hbmFnZXI=",
+        "manifest": "plus-be-webview2-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-webview-manager:v1.0.12",
+        "nodetype": "front",
+        "port": 2304,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-webview2-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXdpdGhkcmF3YWwtbWFuYWdlcg==",
+        "manifest": "plus-be-withdrawal-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-withdrawal-manager:v2.0.6",
+        "nodetype": "front",
+        "port": 2322,
+        "port2": 9113,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-withdrawal-manager",
+        "regcred": [
+            {
+                "name": "regcred"
+            }
+        ],
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXdpdGhkcmF3YWwtbW9kdWxl",
+        "manifest": "plus-be-withdrawal-module",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-withdrawal-module:v2.0.1",
+        "nodetype": "back",
+        "port": 9110,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-withdrawal-module",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXdvcmtmbG93",
+        "manifest": "plus-be-workflow",
+        "replicas": 0,
+        "image": "loyaltolpi/plus-be-workflow:v1.0.0",
+        "nodetype": "back",
+        "port": 7234,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-workflow",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXhlbmRpdGludGVyZmFjZS1tYW5hZ2Vy",
+        "manifest": "plus-be-xenditinterface-manager",
+        "replicas": 1,
+        "image": "loyaltolpi/plus-be-xenditinterrace-manager:v1.0.4",
+        "nodetype": "front",
+        "port": 2302,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-xenditinterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXlva2tlaW50ZXJmYWNlLW1hbmFnZXI=",
+        "manifest": "plus-be-yokkeinterface-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-yokkeinterface-manager:v1.0.3",
+        "nodetype": "front",
+        "port": 2329,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-yokkeinterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1wbHVzLWJlLXl1a2tpbnRlcmZhY2UtbWFuYWdlcg==",
+        "manifest": "plus-be-yukkinterface-manager",
+        "replicas": 2,
+        "image": "loyaltolpi/plus-be-yukkinterface-manager:v1.0.2",
+        "nodetype": "front",
+        "port": 2312,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "plus-be-yukkinterface-manager",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    },
+    {
+        "id": "cHJvZHVjdGlvbi1xb2lucGx1cy1zMy1taW5pbw==",
+        "manifest": "s3-minio",
+        "replicas": 1,
+        "image": "loyaltolpi/s3-minio:v1.0.1",
+        "nodetype": "back",
+        "port": 9193,
+        "port2": null,
+        "env": null,
+        "args": null,
+        "helm": "s3-minio",
+        "regcred": null,
+        "volume": [
+            {
+                "hostPath": {
+                    "path": "/usr/share/zoneinfo/Asia/Jakarta",
+                    "type": ""
+                },
+                "name": "tz-config"
+            },
+            {
+                "name": "file-config-volume",
+                "secret": {
+                    "defaultMode": 420,
+                    "secretName": "file-config-s3-minio"
+                }
+            }
+        ],
+        "mounts": [
+            {
+                "mountPath": "/etc/localtime",
+                "name": "tz-config"
+            },
+            {
+                "mountPath": "/.env",
+                "name": "file-config-volume",
+                "subPath": ".env"
+            }
+        ],
+        "resource": {},
+        "language": "GO",
+        "ns": "production-qoinplus"
+    }
+]

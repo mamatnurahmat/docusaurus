@@ -94,6 +94,15 @@ const config: Config = {
         },
         { to: '/blog', label: 'Blog', position: 'left' },
         {
+          label: 'Table',
+          position: 'left',
+          items: [
+            { to: '/table', label: 'Service Status' },
+            { to: '/production-saas', label: 'Production SaaS' },
+            { to: '/production-qoinhub', label: 'Production Qoinhub' },
+          ],
+        },
+        {
           label: 'Catalog',
           position: 'left',
           items: [
