@@ -34,43 +34,23 @@ export const defaultSidebarConfig: SidebarConfig = {
       collapsed: false,
     },
     {
-      id: 'kubernetes',
-      label: 'Kubernetes',
-      description: 'Container orchestration platform',
-      icon: '📦',
-      items: ['kubernetes'],
+      id: 'infrastructure',
+      label: 'Infrastructure',
+      description: 'Network topology and infrastructure architecture',
+      icon: '🏗️',
+      items: ['infrastructure'],
       collapsed: false,
     },
     {
-      id: 'rancher',
-      label: 'Rancher',
-      description: 'Kubernetes management platform',
-      icon: '🐄',
-      items: ['rancher'],
-      collapsed: false,
-    },
-    {
-      id: 'rke2',
-      label: 'RKE2',
-      description: 'Rancher Kubernetes Engine 2',
-      icon: '⚡',
+      id: 'monitoring',
+      label: 'Monitoring',
+      description: 'Observability stack: logging and metrics',
+      icon: '📊',
       items: [
-        'rke2',
-        'rke2/rke2-installation',
-        'rke2/rke2-configuration',
+        'monitoring/logging-loki',
+        'monitoring/metric-mimir',
       ],
       collapsed: false,
-    },
-    {
-      id: 'configuration',
-      label: 'Configuration',
-      description: 'Setup and configuration guides',
-      icon: '⚙️',
-      items: [
-        'sidebar-configuration',
-        'docker-setup',
-      ],
-      collapsed: true,
     },
   ],
   defaultCollapsed: false,
@@ -99,20 +79,20 @@ export function createSidebarFromConfig(config: SidebarConfig) {
 export function createEnvironmentSidebar() {
   const isDevelopment = process.env.NODE_ENV === 'development';
   const isProduction = process.env.NODE_ENV === 'production';
-  
+
   const config = {
     ...defaultSidebarConfig,
     defaultCollapsed: isProduction, // Collapsed di production, expanded di development
     showIcons: !isProduction, // Sembunyikan emoji di production untuk tampilan yang lebih profesional
   };
-  
+
   return createSidebarFromConfig(config);
 }
 
 // Fungsi untuk membuat sidebar berdasarkan user role (contoh)
 export function createRoleBasedSidebar(userRole: 'admin' | 'developer' | 'viewer' = 'viewer') {
   const config = { ...defaultSidebarConfig };
-  
+
   switch (userRole) {
     case 'admin':
       config.categories.push({
@@ -139,18 +119,18 @@ export function createRoleBasedSidebar(userRole: 'admin' | 'developer' | 'viewer
       // Viewer hanya melihat kategori default
       break;
   }
-  
+
   return createSidebarFromConfig(config);
 }
 
 // Fungsi untuk membuat sidebar berdasarkan feature flags
 export function createFeatureFlagSidebar(featureFlags: Record<string, boolean>) {
   const config = { ...defaultSidebarConfig };
-  
+
   // Filter kategori berdasarkan feature flags
   config.categories = config.categories.filter(category => {
     return featureFlags[category.id] !== false; // Tampilkan jika tidak explicitly disabled
   });
-  
+
   return createSidebarFromConfig(config);
 } 

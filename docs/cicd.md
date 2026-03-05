@@ -121,20 +121,20 @@ pipeline {
 flowchart LR
     A[Developer] --> B[Git Repository]
     B --> C[Jenkins]
-    C --> D[Build & Test]
+    C --> D["Build & Test"]
     D --> E[Docker Image]
     E --> F[Registry]
     F --> G[Deploy Staging]
     G --> H[Deploy Production]
-    
+
     D -->|Fail| I[Notify Developer]
     G -->|Fail| I
-    
+
     classDef dev fill:#e1f5fe
     classDef build fill:#e8f5e8
     classDef deploy fill:#fff3e0
     classDef error fill:#ffebee
-    
+
     class A dev
     class D,E build
     class G,H deploy
