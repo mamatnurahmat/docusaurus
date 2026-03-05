@@ -20,6 +20,6 @@ jobs:
         with:
           personal_token: ${{ secrets.DEPLOY_TOKEN }}
           external_repository: mamatnurahmat/mamatnurahmat.github.io
-          publish_branch: main # or master, depending on your target repo's default branch
+          publish_branch: master # or master, depending on your target repo's default branch
           publish_dir: ./build
           commit_message: "Auto-deploy: ${{ github.sha }}"
