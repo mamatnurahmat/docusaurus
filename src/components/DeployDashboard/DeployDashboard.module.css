@@ -1,0 +1,291 @@
+.section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 3rem 1.5rem 4rem;
+}
+
+.sectionHeader {
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.sectionTitle {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0 0 0.4rem;
+}
+
+.sectionSub {
+    color: var(--ifm-color-secondary-darkest);
+    margin: 0;
+}
+
+/* ── Stat Cards ── */
+.statGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2.5rem;
+}
+
+.statCard {
+    background: var(--ifm-background-surface-color);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: 12px;
+    padding: 1.25rem 1rem;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: transform 0.15s, box-shadow 0.15s;
+}
+
+.statCard:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+}
+
+.statValue {
+    font-size: 2.4rem;
+    font-weight: 800;
+    line-height: 1;
+    margin-bottom: 0.35rem;
+}
+
+.statLabel {
+    font-size: 0.82rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--ifm-color-secondary-darkest);
+}
+
+.statSub {
+    font-size: 0.75rem;
+    color: var(--ifm-color-secondary-darkest);
+    margin-top: 0.2rem;
+    opacity: 0.7;
+}
+
+/* ── Source block ── */
+.sourceBlock {
+    margin-bottom: 2.5rem;
+}
+
+.sourceTitle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1.05rem;
+    font-weight: 700;
+    border-left: 4px solid transparent;
+    padding-left: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.sourceTotalBadge {
+    background: var(--ifm-color-emphasis-200);
+    color: var(--ifm-font-color-base);
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    margin-left: auto;
+}
+
+/* ── Namespace Card ── */
+.nsGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+}
+
+.nsCard {
+    background: var(--ifm-background-surface-color);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-top: 4px solid transparent;
+    border-radius: 10px;
+    padding: 1rem 1.25rem;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    transition: box-shadow 0.15s;
+}
+
+.nsCard:hover {
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.nsHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 0.75rem;
+}
+
+.nsName {
+    font-size: 0.85rem;
+    font-weight: 700;
+    font-family: var(--ifm-font-family-monospace);
+}
+
+.nsLink {
+    font-size: 0.75rem;
+    color: var(--ifm-color-primary);
+    text-decoration: none;
+}
+
+.nsStats {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0.25rem;
+    margin-bottom: 0.75rem;
+    text-align: center;
+}
+
+.nsStatItem {
+    display: flex;
+    flex-direction: column;
+}
+
+.nsStatNum {
+    font-size: 1.3rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.nsStatLabel {
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--ifm-color-secondary-darkest);
+}
+
+/* progress */
+.nsProgress {
+    margin-bottom: 0.6rem;
+}
+
+.nsProgressLabel {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.75rem;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+}
+
+.progressWrap {
+    height: 6px;
+    background: var(--ifm-color-emphasis-200);
+    border-radius: 999px;
+    overflow: hidden;
+}
+
+.progressBar {
+    height: 100%;
+    border-radius: 999px;
+    transition: width 0.4s ease;
+}
+
+/* node badges */
+.nsNodeRow {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+}
+
+.nsBadgeFront {
+    font-size: 0.72rem;
+    background: #dbeafe;
+    color: #1e40af;
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.nsBadgeBack {
+    font-size: 0.72rem;
+    background: #ede9fe;
+    color: #5b21b6;
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+.nsBadgeLang {
+    font-size: 0.72rem;
+    background: var(--ifm-color-emphasis-200);
+    color: var(--ifm-font-color-base);
+    padding: 0.15rem 0.5rem;
+    border-radius: 6px;
+    font-weight: 600;
+}
+
+/* ── Language block ── */
+.langBlock {
+    margin-top: 2.5rem;
+    background: var(--ifm-background-surface-color);
+    border: 1px solid var(--ifm-color-emphasis-200);
+    border-radius: 12px;
+    padding: 1.5rem;
+}
+
+.langTitle {
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin: 0 0 1.25rem;
+}
+
+.langGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 1rem;
+}
+
+.langCard {
+    text-align: center;
+}
+
+.langCount {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--ifm-color-primary);
+    line-height: 1;
+}
+
+.langName {
+    font-size: 0.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 0.25rem 0 0.5rem;
+    color: var(--ifm-color-secondary-darkest);
+}
+
+.langPct {
+    font-size: 0.72rem;
+    margin-top: 0.25rem;
+    color: var(--ifm-color-secondary-darkest);
+}
+
+/* ── Loading ── */
+.loadingWrap {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    padding: 4rem;
+    color: var(--ifm-color-secondary-darkest);
+}
+
+.spinner {
+    width: 22px;
+    height: 22px;
+    border: 3px solid var(--ifm-color-emphasis-300);
+    border-top-color: var(--ifm-color-primary);
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
