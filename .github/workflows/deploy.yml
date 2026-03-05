@@ -16,7 +16,7 @@ jobs:
         run: make build
 
       - name: Copy README to build directory
-        run: cp README.md ./build/
+        run: sudo cp README.md ./build/
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
