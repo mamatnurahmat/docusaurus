@@ -150,20 +150,20 @@ function DeployTable({ entry }: { entry: ManifestEntry }) {
                                 <tr><td colSpan={COLUMNS.length + 1} className={styles.emptyRow}>No results for "{search}"</td></tr>
                             ) : filtered.map((row, i) => (
                                 <tr key={row.id} className={styles.tr}>
-                                    <td className={`${styles.td} ${styles.mono}`} style={{ opacity: 0.5, fontSize: '0.8rem' }}>{i + 1}</td>
-                                    <td className={styles.td}><strong>{row.manifest}</strong></td>
-                                    <td className={`${styles.td} ${styles.mono}`} style={{ fontSize: '0.8rem' }}>{row.image}</td>
-                                    <td className={styles.td}>
+                                    <td className={`${styles.td} ${styles.mono}`}>{i + 1}</td>
+                                    <td className={styles.td} data-label="Manifest"><strong>{row.manifest}</strong></td>
+                                    <td className={`${styles.td} ${styles.mono}`} data-label="Image" style={{ fontSize: '0.8rem', wordBreak: 'break-all' }}>{row.image}</td>
+                                    <td className={styles.td} data-label="Node Type">
                                         <span className={`${styles.envBadge} ${NODETYPE_STYLE[row.nodetype] ?? ''}`}>{row.nodetype}</span>
                                     </td>
-                                    <td className={`${styles.td} ${styles.center}`}>
+                                    <td className={`${styles.td} ${styles.center}`} data-label="Replicas">
                                         <span className={`${styles.statusBadge} ${row.replicas > 0 ? styles.statusRunning : styles.statusStopped}`}>{row.replicas}</span>
                                     </td>
-                                    <td className={`${styles.td} ${styles.center} ${styles.mono}`}>{row.port ?? '—'}</td>
-                                    <td className={`${styles.td} ${styles.center} ${styles.mono}`}>{row.port2 ?? '—'}</td>
-                                    <td className={styles.td}>{row.helm ?? <span style={{ opacity: 0.4 }}>—</span>}</td>
-                                    <td className={styles.td}>{row.language}</td>
-                                    <td className={`${styles.td} ${styles.mono}`} style={{ fontSize: '0.8rem' }}>{row.ns}</td>
+                                    <td className={`${styles.td} ${styles.center} ${styles.mono}`} data-label="Port" data-empty={row.port === null ? 'true' : undefined}>{row.port ?? '—'}</td>
+                                    <td className={`${styles.td} ${styles.center} ${styles.mono}`} data-label="Port 2" data-empty={row.port2 === null ? 'true' : undefined}>{row.port2 ?? '—'}</td>
+                                    <td className={styles.td} data-label="Helm" data-empty={row.helm === null ? 'true' : undefined}>{row.helm ?? <span style={{ opacity: 0.4 }}>—</span>}</td>
+                                    <td className={styles.td} data-label="Language">{row.language}</td>
+                                    <td className={`${styles.td} ${styles.mono}`} data-label="Namespace" style={{ fontSize: '0.8rem' }}>{row.ns}</td>
                                 </tr>
                             ))}
                         </tbody>
