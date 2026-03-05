@@ -1,0 +1,17 @@
+[
+    {
+        "slug": "production-saas",
+        "label": "Production SaaS",
+        "file": "/data/deploy/production-saas.json"
+    },
+    {
+        "slug": "production-wkwk",
+        "label": "Production Wkwk",
+        "file": "/data/deploy/production-wkwk.json"
+    },
+    {
+        "slug": "production-qoinhub",
+        "label": "Production Qoinhub",
+        "file": "/data/deploy/production-qoinhub.json"
+    }
+]

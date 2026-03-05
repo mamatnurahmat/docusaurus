@@ -93,24 +93,16 @@ const config: Config = {
           label: 'DevOps',
         },
         { to: '/blog', label: 'Blog', position: 'left' },
-        {
-          label: 'Table',
-          position: 'left',
-          items: [
-            { to: '/table', label: 'Service Status' },
-            { to: '/production-saas', label: 'Production SaaS' },
-            { to: '/production-qoinhub', label: 'Production Qoinhub' },
-          ],
-        },
-        {
-          label: 'Catalog',
-          position: 'left',
-          items: [
-            { to: '/docs/deployment', label: 'Deployment' },
-            { to: '/docs/service', label: 'Service' },
-            { to: '/docs/domain', label: 'Domain' },
-          ],
-        },
+        { to: '/deploy-table', label: 'Table', position: 'left' },
+        // {
+        //   label: 'Catalog',
+        //   position: 'left',
+        //   items: [
+        //     { to: '/docs/deployment', label: 'Deployment' },
+        //     { to: '/docs/service', label: 'Service' },
+        //     { to: '/docs/domain', label: 'Domain' },
+        //   ],
+        // },
         {
           href: 'https://github.com/mamatnurahmat/docusaurus',
           label: 'GitHub',
