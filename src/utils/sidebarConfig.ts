@@ -18,11 +18,29 @@ export interface SidebarConfig {
 export const defaultSidebarConfig: SidebarConfig = {
   categories: [
     {
+      id: 'security',
+      label: 'Security',
+      description: 'Keamanan infrastruktur: WAF, CrowdSec, dan pertahanan berlapis',
+      icon: '🔐',
+      items: [
+        'security',
+        'security/waf-haproxy-modsecurity',
+        'security/crowdsec-haproxy',
+        'security/crowdsec-nginx',
+      ],
+      collapsed: false,
+    },
+    {
       id: 'cicd',
       label: 'CI/CD',
       description: 'Continuous Integration & Deployment',
       icon: '🔄',
-      items: ['cicd'],
+      items: [
+        'cicd',
+        'cicd/gitops',
+        'cicd/jenkins',
+        'cicd/buildx-docker',
+      ],
       collapsed: false,
     },
     {
@@ -56,6 +74,7 @@ export const defaultSidebarConfig: SidebarConfig = {
   defaultCollapsed: false,
   showIcons: true,
 };
+
 
 // Fungsi untuk membuat sidebar berdasarkan konfigurasi
 export function createSidebarFromConfig(config: SidebarConfig) {
