@@ -1,19 +1,49 @@
-facebook:
-  label: Facebook
-  permalink: /facebook
-  description: Facebook tag description
+security:
+  label: Security
+  permalink: /security
+  description: Artikel seputar keamanan infrastruktur dan aplikasi
 
-hello:
-  label: Hello
-  permalink: /hello
-  description: Hello tag description
+waf:
+  label: WAF
+  permalink: /waf
+  description: Web Application Firewall
 
-docusaurus:
-  label: Docusaurus
-  permalink: /docusaurus
-  description: Docusaurus tag description
+haproxy:
+  label: HAProxy
+  permalink: /haproxy
+  description: HAProxy load balancer dan reverse proxy
 
-hola:
-  label: Hola
-  permalink: /hola
-  description: Hola tag description
+crowdsec:
+  label: CrowdSec
+  permalink: /crowdsec
+  description: CrowdSec collaborative security engine
+
+nginx:
+  label: Nginx
+  permalink: /nginx
+  description: Nginx dan Nginx Proxy Manager
+
+gitops:
+  label: GitOps
+  permalink: /gitops
+  description: GitOps methodology dan tools
+
+kubernetes:
+  label: Kubernetes
+  permalink: /kubernetes
+  description: Container orchestration dengan Kubernetes
+
+monitoring:
+  label: Monitoring
+  permalink: /monitoring
+  description: Monitoring dan observability
+
+logging:
+  label: Logging
+  permalink: /logging
+  description: Centralized logging dan log management
+
+devops:
+  label: DevOps
+  permalink: /devops
+  description: DevOps practices dan methodologies
