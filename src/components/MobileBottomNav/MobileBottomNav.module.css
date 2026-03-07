@@ -1,0 +1,122 @@
+/* =====================================================
+   Mobile Bottom Navigation Bar
+   Only visible on mobile (≤ 996px)
+   ===================================================== */
+
+.bottomNav {
+    display: none;
+    /* hidden by default, shown on mobile via media query */
+}
+
+@media (max-width: 996px) {
+    .bottomNav {
+        display: flex;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        z-index: 1000;
+        height: 64px;
+        align-items: stretch;
+        background: rgba(255, 255, 255, 0.92);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-top: 1px solid rgba(0, 0, 0, 0.08);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.08);
+        /* Safe area inset for iOS notch/home bar */
+        padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    /* Dark mode */
+    [data-theme='dark'] .bottomNav {
+        background: rgba(15, 23, 42, 0.94);
+        border-top: 1px solid rgba(255, 255, 255, 0.08);
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.4);
+    }
+
+    /* Each tab item */
+    .navItem {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 4px;
+        padding: 8px 4px;
+        color: var(--ifm-color-emphasis-500);
+        text-decoration: none !important;
+        position: relative;
+        transition: color 0.2s ease;
+        -webkit-tap-highlight-color: transparent;
+        min-height: 48px;
+    }
+
+    .navItem:hover {
+        color: var(--ifm-color-primary);
+        text-decoration: none;
+        background: rgba(14, 165, 233, 0.06);
+    }
+
+    /* Active tab */
+    .navItemActive {
+        color: var(--ifm-color-primary) !important;
+        font-weight: 600;
+    }
+
+    [data-theme='dark'] .navItem {
+        color: var(--ifm-color-emphasis-400);
+    }
+
+    [data-theme='dark'] .navItemActive {
+        color: var(--ifm-color-primary) !important;
+    }
+
+    /* Icon */
+    .icon {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: transform 0.2s ease;
+    }
+
+    .navItemActive .icon {
+        transform: translateY(-1px);
+    }
+
+    /* Label text */
+    .label {
+        font-size: 10px;
+        font-weight: 500;
+        letter-spacing: 0.02em;
+        line-height: 1;
+    }
+
+    .navItemActive .label {
+        font-weight: 700;
+    }
+
+    /* Active indicator dot/line at top of tab */
+    .indicator {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 32px;
+        height: 3px;
+        background: var(--ifm-color-primary);
+        border-radius: 0 0 4px 4px;
+        animation: indicatorIn 0.2s ease forwards;
+    }
+
+    @keyframes indicatorIn {
+        from {
+            width: 0;
+            opacity: 0;
+        }
+
+        to {
+            width: 32px;
+            opacity: 1;
+        }
+    }
+}

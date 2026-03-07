@@ -284,13 +284,136 @@ article.margin-bottom--xl:hover {
 /* ===== NAVBAR STYLING ===== */
 .navbar {
   backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
   box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
 }
 
 [data-theme='dark'] .navbar {
-  background-color: rgba(15, 23, 42, 0.9);
+  background-color: rgba(15, 23, 42, 0.85);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.06);
 }
+
+/* Mobile Navbar / Sidebar Styling */
+/* Override Docusaurus defaults yang membatasi height sidebar ke 60px */
+.navbar-sidebar {
+  /* Reset height & overflow bawaan Docusaurus yang membatasi sidebar ke 60px */
+  height: 100% !important;
+  max-height: 100vh !important;
+  overflow-y: auto !important;
+  box-shadow: none;
+}
+
+/* Saat sidebar terbuka */
+.navbar-sidebar--show {
+  background: #ffffff;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.15);
+}
+
+[data-theme='dark'] .navbar-sidebar--show {
+  background: #0f172a;
+  box-shadow: 4px 0 24px rgba(0, 0, 0, 0.5);
+}
+
+.navbar-sidebar__brand {
+  padding: 1rem 1.5rem;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  position: sticky;
+  top: 0;
+  background: inherit;
+  z-index: 1;
+}
+
+[data-theme='dark'] .navbar-sidebar__brand {
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.navbar-sidebar__items {
+  padding: 0.75rem;
+  flex: 1;
+}
+
+/* Menu section headings */
+.navbar-sidebar__items .menu__list-item-collapsible {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--ifm-color-emphasis-600);
+  padding: 0.5rem 1rem 0.25rem;
+}
+
+/* Backdrop overlay saat sidebar terbuka */
+.navbar-sidebar__backdrop {
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+
+/* Mobile menu items */
+.navbar-sidebar .menu__link {
+  border-radius: 8px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 0.15rem;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: background-color 0.15s ease, color 0.15s ease;
+  min-height: 48px;
+  /* WCAG minimum touch target */
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-sidebar .menu__link:hover {
+  background: rgba(14, 165, 233, 0.1);
+  color: var(--ifm-color-primary);
+  text-decoration: none;
+}
+
+.navbar-sidebar .menu__link--active {
+  background: rgba(14, 165, 233, 0.12);
+  color: var(--ifm-color-primary);
+  font-weight: 600;
+}
+
+[data-theme='dark'] .navbar-sidebar .menu__link:hover {
+  background: rgba(56, 189, 248, 0.12);
+}
+
+[data-theme='dark'] .navbar-sidebar .menu__link--active {
+  background: rgba(56, 189, 248, 0.1);
+}
+
+/* Close button di mobile sidebar */
+.navbar-sidebar__close {
+  padding: 0.5rem;
+  border-radius: 8px;
+  transition: background-color 0.15s;
+}
+
+.navbar-sidebar__close:hover {
+  background-color: rgba(14, 165, 233, 0.1);
+}
+
+/* Hamburger menu button */
+.navbar__toggle {
+  border-radius: 8px;
+  padding: 4px 6px;
+  transition: background-color 0.2s;
+}
+
+.navbar__toggle:hover {
+  background-color: rgba(14, 165, 233, 0.1);
+}
+
+[data-theme='dark'] .navbar__toggle:hover {
+  background-color: rgba(56, 189, 248, 0.1);
+}
+
+
+
 
 /* ===== FOOTER STYLING ===== */
 .footer--dark {
@@ -316,7 +439,31 @@ article.margin-bottom--xl:hover {
   background: rgba(14, 165, 233, 0.5);
 }
 
-/* ===== RESPONSIVE ===== */
+/* ===== RESPONSIVE — MOBILE ===== */
+@media (max-width: 996px) {
+
+  /* Sembunyikan hamburger button karena Bottom Nav menggantikan fungsinya */
+  .navbar__toggle {
+    display: none !important;
+  }
+
+  /* Sembunyikan sidebar bawaan Docusaurus — tidak digunakan lagi */
+  .navbar-sidebar {
+    display: none !important;
+  }
+
+  /* Tambah padding bawah pada wrapper utama agar konten
+     tidak tertutup oleh bottom nav bar (tinggi 64px + buffer) */
+  .main-wrapper {
+    padding-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  }
+
+  /* Footer juga perlu margin bawah */
+  .footer {
+    margin-bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 @media (max-width: 768px) {
   .markdown table {
     font-size: 0.85rem;
