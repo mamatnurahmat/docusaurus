@@ -1,5 +1,5 @@
 ---
-id: cicd-gitops
+id: gitops
 slug: /cicd/gitops
 title: GitOps
 ---
