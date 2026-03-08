@@ -19,7 +19,7 @@ export default function LoginPage(): React.ReactElement {
     // Redirect if already logged in
     useEffect(() => {
         if (!isLoading && isAuthenticated) {
-            window.location.href = '/deploy-table';
+            window.location.href = '/';
         }
     }, [isAuthenticated, isLoading]);
 
@@ -33,7 +33,7 @@ export default function LoginPage(): React.ReactElement {
         setError('');
         const result = await login(username, password);
         if (result === 'ok') {
-            window.location.href = '/deploy-table';
+            window.location.href = '/';
         } else if (result === 'invalid') {
             setError('Username atau password salah.');
         } else {
@@ -53,13 +53,13 @@ export default function LoginPage(): React.ReactElement {
     }
 
     return (
-        <Layout title="Login — DevOps Portal" description="Login to access deployment tables">
+        <Layout title="Login" description="Login to DevOps Portal">
             <div className={styles.centerWrap}>
                 <div className={styles.card}>
                     {/* Logo / icon */}
                     <div className={styles.icon}>🔐</div>
                     <h1 className={styles.title}>DevOps Portal</h1>
-                    <p className={styles.subtitle}>Login untuk akses Deployment Table</p>
+                    <p className={styles.subtitle}>Login untuk akses DevOps Portal</p>
 
                     <form onSubmit={handleSubmit} className={styles.form}>
                         <div className={styles.field}>

@@ -30,7 +30,7 @@ build:
 	docker run --rm \
 		-v $(shell pwd):/app \
 		-w /app \
-		node:18-alpine \
+		node:20-alpine \
 		sh -c "npm install && npm run build"
 	@echo "Success! Static files generated in: ./build"
 

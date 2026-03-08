@@ -74,7 +74,20 @@ const config: Config = {
     ],
   ],
 
-  themes: ['@docusaurus/theme-mermaid'],
+  themes: [
+    '@docusaurus/theme-mermaid',
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+      ({
+        hashed: true,
+        language: ["en"],
+        indexDocs: true,
+        indexBlog: true,
+        indexPages: true,
+      }),
+    ],
+  ],
 
   themeConfig: {
     // Replace with your project's social card
@@ -93,7 +106,6 @@ const config: Config = {
           label: 'DevOps',
         },
         { to: '/blog', label: 'Blog', position: 'left' },
-        { to: '/deploy-table', label: 'Table', position: 'left' },
         // {
         //   label: 'Catalog',
         //   position: 'left',
@@ -165,6 +177,7 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
 
   plugins: [
+
     // [
     //   '@docusaurus/plugin-client-redirects',
     //   {

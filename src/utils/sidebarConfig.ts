@@ -38,6 +38,7 @@ export const defaultSidebarConfig: SidebarConfig = {
       items: [
         'cicd',
         'cicd/gitops',
+        'cicd/argocd-autopilot',
         'cicd/jenkins',
         'cicd/buildx-docker',
       ],

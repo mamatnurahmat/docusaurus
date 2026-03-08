@@ -31,6 +31,7 @@ Otomatisasi proses build, test, dan deployment.
 |---|---|
 | [CI/CD Overview](./cicd) | Konsep dasar dan strategi CI/CD |
 | [GitOps dalam CI/CD](./cicd/gitops) | Integrasi GitOps (ArgoCD/Flux) ke dalam pipeline CI/CD |
+| [ArgoCD Autopilot](./cicd/argocd-autopilot) | Manajemen Multi-Cluster via Branch Isolation dan Lokal ArgoCD |
 | [Jenkins](./cicd/jenkins) | Pipeline CI/CD dengan Jenkins, Jenkinsfile, dan integrasi Kubernetes |
 | [Docker Buildx](./cicd/buildx-docker) | Multi-platform image build dengan Docker Buildx dan BuildKit |
 
